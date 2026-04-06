@@ -105,6 +105,36 @@ sl-divider {
   z-index: 1;
 }
 
+/* Specific styles for Team Member Photos */
+.team-photo-container {
+  width: 140px;      /* Set a fixed size for the circle */
+  height: 140px;
+  margin: 0 auto 16px auto; /* Centers the circle in the card */
+  border-radius: 50%;
+  overflow: hidden;   /* This creates the crop */
+  border: 3px solid var(--accent); /* Optional: matches your theme's blue */
+  background: var(--bg-card);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.team-photo-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;    /* This is the magic line that prevents stretching */
+  object-position: center top; /* Keeps faces in frame if photos are tall */
+  display: block;
+}
+
+/* Update your team-card to center the text */
+.team-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .hero-tags {
   display: flex;
   flex-wrap: wrap;
@@ -137,6 +167,26 @@ sl-divider {
   font-size: 2rem;
 }
 
+/* New rule for vertical image stacking */
+.vertical-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 32px; /* Adds space between the stacked images */
+  margin: 40px 0;
+}
+
+.vertical-stack .fig-component {
+  width: 100%;
+  max-width: 900px; /* Adjust this to make the images as large as you like */
+  margin: 0 auto;   /* Centers the images */
+}
+
+.vertical-stack .image-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .section-intro {
   margin-top: 12px;
   max-width: 720px;
@@ -150,9 +200,10 @@ sl-divider {
 }
 
 .table-of-content {
-  background: transparent;
-  box-shadow: none;
-  padding: 0;
+  background: #ffffff; /* Changes from transparent to white */
+  border-radius: 24px;
+  padding: 36px 40px; /* Restores padding to match other white cards */
+  box-shadow: var(--shadow-soft); /* Restores the soft shadow */
 }
 
 .table-of-content sl-tree {
@@ -280,7 +331,9 @@ div[id^="section"] {
 }
 
 .fig-group.cols-2 {
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr; /* This forces the vertical stack */
+  max-width: 800px;           /* Optional: prevents images from getting too wide on desktop */
+  margin: 32px auto;          /* Centers the stack if you use max-width */
 }
 
 .fig-group.cols-3 {
@@ -347,7 +400,7 @@ div[id^="section"] {
 
 /* Acknowledgement section */
 .acknowledgement-section {
-  background: linear-gradient(145deg, rgba(14, 165, 233, 0.06), rgba(99, 102, 241, 0.06));
+  background: #ffffff; /* Sets background to solid white */
   border-left: 4px solid var(--primary);
 }
 
@@ -435,6 +488,31 @@ a:hover {
   font-size: 0.95rem;
 }
 
+/* Responsive Video Container */
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 Ratio */
+  height: 0;
+  overflow: hidden;
+  border-radius: 18px; /* Matches your image-wrapper style */
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border);
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Adjust gap for the video grid */
+.fig-group.cols-2 {
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
 /* Video placeholder */
 .video-placeholder {
   background: var(--bg-muted);
@@ -496,5 +574,34 @@ a:hover {
 
   .report-section h2 {
     font-size: 1.4rem;
+  }
+}
+
+/* Specific sizing for the Chat Screenshots */
+.chat-screenshots {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Forces side-by-side */
+  gap: 20px;
+  max-width: 600px; /* Limits the overall width of the pair */
+  margin: 32px auto; /* Centers the group */
+}
+
+.chat-screenshots .image-wrapper {
+  background: none; /* Removes the gray background if the image has transparency */
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+}
+
+.chat-screenshots img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Ensure they stay side-by-side even on slightly smaller screens */
+@media (max-width: 600px) {
+  .chat-screenshots {
+    grid-template-columns: 1fr 1fr; 
+    gap: 10px;
   }
 }
